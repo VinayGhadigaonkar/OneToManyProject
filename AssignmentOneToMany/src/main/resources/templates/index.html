@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">	
+</head>
+<body>
+<div class="container text-center">
+	<div><h1>Welcome to Cateogry Apps</h1></div>
+	
+	<div class="p-2">
+	<a class="h2" th:href="@{/categories}">List Categegories</a>
+	</div>
+	
+	<div class="p-2">
+	<a class="h2" th:href="@{/categories/new}">Create Categegories</a>
+	</div>
+	
+	<div class="p-2">
+	<a class="h2" th:href="@{/products}">List Product</a>
+	</div>
+	
+	<div class="p-2">
+	<a class="h2" th:href="@{/products/new}">Create Products</a>
+	</div>
+	 	
+</div>
+</body>
+</html>

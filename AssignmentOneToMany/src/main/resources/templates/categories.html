@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>List Categories</title>
+<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">	
+</head>
+<body>
+<div class="container text-center">
+	<div><h1>Welcome to Cateogry Apps</h1></div>
+	 	<table class="table table-bordered">
+	 		<thead class="thread-dark">
+	 			<tr>
+	 			<th>ID</th>
+	 			<th>Categroy Name</th>
+	 			<th>Cateory Products Name</th>
+	 			<th></th>
+	 			</tr>
+	 		</thead>
+	 		
+	 		<tbody>
+	 			<th:block th:each="category: ${listCategory}">
+	 			<tr>
+	 				<td>[[${category.id}]]</td>
+	 					<td>[[${category.Name}]]</td>
+	 					<td>[[${category.prouct}]]</td>
+	 					<td>
+	 					<a th:href="@{'/category/edit/' + ${category.id}}">Edit</a>
+	 					</td>
+	 			</tr>
+	 			</th:block> 
+	 		</tbody>
+	 	</table>
+</div>
+</body>
+</html>
