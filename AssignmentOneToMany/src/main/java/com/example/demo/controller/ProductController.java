@@ -66,15 +66,15 @@ public class ProductController
 	  
 	  
 	  @GetMapping("/pagess/{pageNos}")
-		public String finds(@PathVariable(value = "pageNos")int pageNo,Model model)
+		public String finds(@PathVariable(value = "pageNos")int pageNos,Model model)
 		{
 			int pageSize =5;
-			Page<Product> page = productRepo.finds(pageNo, pageSize);
-			List<Product> listProdcuts = page.getContent();
-			model.addAttribute("currentPage", pageNo);
+			Page<Product> page = productRepo.finds(pageNos, pageSize);
+			List<Product> listProducts = page.getContent();
+			model.addAttribute("currentPage", pageNos);
 			model.addAttribute("totalPages", page.getTotalPages());
 			model.addAttribute("totalItems", page.getTotalElements());
-			model.addAttribute("listProdcuts", listProdcuts);
+			model.addAttribute("listProducts", listProducts);
 			return "product";
 		}
 }
