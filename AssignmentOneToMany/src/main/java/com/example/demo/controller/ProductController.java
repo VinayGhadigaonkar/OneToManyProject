@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,23 +25,18 @@ public class ProductController
 	
 	
 	@GetMapping("/products")
-	public String listCategories(Model model)
+	public String listProdcuts(Model model)
 	{
-		List<Product> listProducts = productRepo.findAll();
-		model.addAttribute("listProducts", listProducts);
-		return "product";
+		return finds(1, model);
 	}
 	
-	
-	 
 	  @GetMapping("/products/new")
 	   public String showCreateNewProductForm(Model model) 
 	  {
-		 List<Category> listCategories= categoryRepo.findAll();
-	   model.addAttribute("listCategories", listCategories);
-	   model.addAttribute("product", new Product());
-	   
-	   return "product_form";
+		   List<Category> listCategories= categoryRepo.findAll();
+		   model.addAttribute("listCategories", listCategories);
+		   model.addAttribute("product", new Product());	   
+		   return "product_form";
 	   }
 	   
 	   @PostMapping("/product/save")
@@ -51,14 +47,13 @@ public class ProductController
 	    }
 	  @GetMapping("/product/edit/{id}")
 	  public String showEditProductForm(@PathVariable("id")Long id,Model model)
-	  {
+	{
 		Product product=  productRepo.findById(id).get();
 		model.addAttribute("product", product);
 		
 		 List<Category> listCategories= categoryRepo.findAll();
-		   model.addAttribute("listCategories", listCategories);
-		    
-		
+		 model.addAttribute("listCategories", listCategories);
+		 
 		return "product_form";
 	  }
 	
@@ -67,5 +62,19 @@ public class ProductController
 	  {
 		  productRepo.deleteById(id);
 		  return "redirect:/products";
-	  }
+	  } 
+	  
+	  
+	  @GetMapping("/pagess/{pageNos}")
+		public String finds(@PathVariable(value = "pageNos")int pageNo,Model model)
+		{
+			int pageSize =5;
+			Page<Product> page = productRepo.finds(pageNo, pageSize);
+			List<Product> listProdcuts = page.getContent();
+			model.addAttribute("currentPage", pageNo);
+			model.addAttribute("totalPages", page.getTotalPages());
+			model.addAttribute("totalItems", page.getTotalElements());
+			model.addAttribute("listProdcuts", listProdcuts);
+			return "product";
+		}
 }

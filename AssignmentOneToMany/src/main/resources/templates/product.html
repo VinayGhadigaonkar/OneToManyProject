@@ -14,7 +14,7 @@
 	 			<th>ID</th>
 	 			<th>Product Name</th>
 	 		   	<th>Product Category</th>  
-	 			<th></th>
+	 			<th>Edit</th>
 	 			</tr>
 	 		</thead>
 	 		
@@ -24,6 +24,7 @@
 	 				<td>[[${product.id}]]</td>
 	 				 <td>[[${product.Pro_Name}]]</td>
 	 		 		 <td>[[${product.category}]]</td>
+	 		 		 
 	 				<td>
 	 					<a th:href="@{'/product/edit/' + ${product.id}}">Edit</a>
 	 					&nbsp;
@@ -33,6 +34,35 @@
 	 			</th:block> 
 	 		</tbody>
 	 	</table>
+	 	
+	 	<div th:if="${totalPages>1}">
+ 		<div class="row col-sm-10">
+ 			<div class="col-sm-2">
+ 				Total Rows:[[${totalItems}]]
+ 			</div>
+ 			<div class="com-sm-1">
+ 				<span th:each="i: ${#numbers.sequence(1,totalPages)}">
+ 					<a th:if="${currentPage != i}" th:href="@{'/pagess/' +${i}}">[[${i}]]</a>
+ 					<span th:unless="${currentPage != i}">[[${i}]]</span>&nbsp;&nbsp;
+ 				</span>
+ 			</div>
+ 			
+ 			<div class="com-sm-1">
+ 				<a th:if="${currentPage < totalPages}" th:href="@{'/pagess/' +${currentPage + 1}}">Next</a>
+ 				<span th:unless="${currentPage < totalPages}">Next</span>&nbsp;&nbsp;
+ 			</div>
+ 			
+ 			
+ 			<div class="com-sm-1">
+ 				<a th:if="${currentPage < totalPages}" th:href="@{'/pagess/' +${totalPages}}">Last</a>
+ 				<span th:unless="${currentPage < totalPages}">Last</span>&nbsp;&nbsp;
+ 			</div>
+ 			
+ 		</div>
+ 	</div>
+	 	
+	 	
+	 	 
 </div>
 </body>
 </html>
